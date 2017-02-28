@@ -1,0 +1,12 @@
+# machine learning materials come from coursera web training :
+https://www.coursera.org/learn/machine-learning 
+
+
+# Install and launch octave GUI (from: https://doc.ubuntu-fr.org/octave)
+
+sudo add-apt-repository ppa:philip5/extra
+sudo apt-get update
+sudo apt-get install octave
+
+octave --force-gui
+
