@@ -20,15 +20,20 @@ grad = zeros(size(theta));
 %
 
 
+% 1.2. Regularized linear regression cost function
 
+% linear hypothesis
+h = X * theta;
 
+% cost without regularization
+J = 1 / 2 / m * (h - y)' * (h - y);
 
+% compute regularization
+theta_reg = [0; theta(2:length(theta))];
+J = J + lambda / (2 * m) * (theta_reg' * theta_reg);
 
-
-
-
-
-
+% 1.3. Regularized linear regression gradient
+grad = (1 / m * (h - y)' * X)' + lambda / m * theta_reg;
 
 % =========================================================================
 
