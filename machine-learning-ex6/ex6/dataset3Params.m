@@ -23,11 +23,32 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+min_C = C;
+min_sigma = sigma;
+min_error = 1e10;
+i = 0;
 
+for C = [.01, .03, .1, .3, 1, 3, 10, 30],
+  for sigma = [.01, .03, .1, .3, 1, 3, 10, 30],
+    i = i + 1;
+    model = svmTrain(X, y, C, @(x1, x2) gaussianKernel(x1, x2, sigma)); 
+    predictions = svmPredict(model, Xval);
 
+    error = mean(double(predictions ~= yval));
+    fprintf('test %d (C %f - sigma %f) gives error %f\n', i, C, sigma, error);
+    
+    if error < min_error
+      fprintf('!!!!!!! new min !!!!!!!!!');
+ 
+      min_error = error;
+      min_C = C;
+      min_sigma = sigma;
+    end
+  end
+end
 
-
-
+C = min_C
+sigma = min_sigma
 
 % =========================================================================
 
